@@ -1,0 +1,11 @@
+[Unit]
+Description=Gunicorn instance to serve NegBio
+After=network.target
+
+[Service]
+WorkingDirectory=/NegBio
+Environment="PATH=/NegBio/negbio_env/bin"
+ExecStart=/NegBio/negbio_env/bin/gunicorn --workers 3 --bind unix:negbio.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
